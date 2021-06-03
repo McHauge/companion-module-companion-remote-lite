@@ -1,2 +1,8 @@
 # companion-module-companion-remote-lite
-Basic module for pressing buttons and changing page on a remote companion setup
+
+See HELP.md and LICENSE
+
+**V0.0.1**
+
+- Basic setup with TCP and UDP
+- Added 2 actions with "Bank Press" and "Page Set"

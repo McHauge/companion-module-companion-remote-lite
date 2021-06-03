@@ -1,0 +1,28 @@
+{
+  "name": "companion-remote-lite",
+	"version": "0.0.1",
+	"api_version": "1.0.0",
+	"description": "Companion Remote Lite",
+	"keywords": [
+		"Remote"
+	],
+	"manufacturer": "Bitfocus",
+	"product": "Companion Remote",
+	"shortname": "RemoteLite",
+	"homepage": "https://github.com/bitfocus/companion-module-companion-remote-lite#readme",
+	"main": "src/index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bitfocus/companion-module-companion-remote-lite.git"
+	},
+	"author": "Andreas H. Thomsen <mc-hauge@hotmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/bitfocus/companion-module-companion-remote-lite/issues"
+	},
+	"dependencies": {
+	}
+}
