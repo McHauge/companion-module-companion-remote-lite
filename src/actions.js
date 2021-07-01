@@ -8,11 +8,11 @@ exports.getActions = function () {
 					id: 'command',
 					label: 'Bank Press Command',
 					default: 'BANK-PRESS',
-					choices:  [
+					choices: [
 						{ id: 'BANK-PRESS', label: 'Press and Release' },
 						{ id: 'BANK-DOWN', label: 'Press Down' },
-						{ id: 'BANK-UP', label: 'Release' }
-					]
+						{ id: 'BANK-UP', label: 'Release' },
+					],
 				},
 				{
 					type: 'number',
@@ -40,11 +40,11 @@ exports.getActions = function () {
 					id: 'command',
 					label: 'Page Command',
 					default: 'PAGE-SET',
-					choices:  [
+					choices: [
 						{ id: 'PAGE-SET', label: 'Set Page' },
 						{ id: 'PAGE-UP', label: 'Increase Page' },
-						{ id: 'PAGE-DOWN', label: 'Decrease Page' }
-					]
+						{ id: 'PAGE-DOWN', label: 'Decrease Page' },
+					],
 				},
 				{
 					type: 'textinput',
@@ -72,11 +72,11 @@ exports.executeAction = function (action) {
 
 	switch (action.action) {
 		case 'BankPress':
-			cmd = opt.command + ' ' +  opt.page + ' ' + opt.bank
+			cmd = opt.command + ' ' + opt.page + ' ' + opt.bank
 			break
 		case 'PageSet':
 			if (opt.command == 'PAGE-SET') {
-				cmd = opt.command + ' ' +  opt.page + ' ' + opt.surfaceID
+				cmd = opt.command + ' ' + opt.page + ' ' + opt.surfaceID
 			} else {
 				cmd = opt.command + ' ' + opt.surfaceID
 			}
@@ -86,27 +86,23 @@ exports.executeAction = function (action) {
 	}
 
 	if (cmd !== undefined) {
-
 		cmd = cmd + '\n\r'
 
 		console.log(cmd)
 		if (self.config.prot == 'tcp') {
+			self.debug('sending', cmd, 'to', self.config.host)
 
-			self.debug('sending',cmd,"to",self.config.host);
-
-			if (self.socket !== undefined && self.socket.connected) {				
-				self.socket.send(cmd);
-			}
-			else {
-				self.debug('Socket not connected :(');
+			if (self.socket !== undefined && self.socket.connected) {
+				self.socket.send(cmd)
+			} else {
+				self.debug('Socket not connected :(')
 			}
 		}
 
 		if (self.config.prot == 'udp') {
-
-			if (self.udp !== undefined ) {
-				self.debug('sending',cmd,"to",self.config.host);
-				self.udp.send(cmd);
+			if (self.udp !== undefined) {
+				self.debug('sending', cmd, 'to', self.config.host)
+				self.udp.send(cmd)
 			}
 		}
 	}

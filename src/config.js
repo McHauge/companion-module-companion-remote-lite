@@ -38,11 +38,11 @@ exports.getConfigFields = function () {
 			label: 'Connect with TCP / UDP',
 			width: 6,
 			default: 'tcp',
-			choices:  [
+			choices: [
 				{ id: 'tcp', label: 'TCP' },
 				{ id: 'udp', label: 'UDP' },
 				// { id: 'http', label: 'HTTP' }
-			]
+			],
 		},
 		{
 			type: 'text',

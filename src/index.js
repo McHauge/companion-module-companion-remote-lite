@@ -1,5 +1,5 @@
-var tcp           	= require('../../../tcp');
-var udp          	= require('../../../udp');
+var tcp = require('../../../tcp')
+var udp = require('../../../udp')
 const instance_skel = require('../../../instance_skel')
 const { executeAction, getActions } = require('./actions')
 const { getConfigFields } = require('./config')
@@ -25,13 +25,13 @@ class CompanionRemoteLite extends instance_skel {
 	// Init module
 	init() {
 		if (this.config.prot == 'tcp') {
-			this.init_tcp();
-		};
-	
+			this.init_tcp()
+		}
+
 		if (this.config.prot == 'udp') {
-			this.init_udp();
-		};
-	
+			this.init_udp()
+		}
+
 		// if (this.config.prot == 'http') {
 		// 	self.status(self.STATE_OK);
 		// };
@@ -40,7 +40,7 @@ class CompanionRemoteLite extends instance_skel {
 		// this.init_feedbacks()
 		// initPresets.bind(this)()
 
-		this.status(this.STATE_OK);
+		this.status(this.STATE_OK)
 	}
 
 	// 192.168.191.88
@@ -48,86 +48,86 @@ class CompanionRemoteLite extends instance_skel {
 	init_udp() {
 		var self = this
 		if (self.udp !== undefined) {
-			self.udp.destroy();
-			delete self.udp;
+			self.udp.destroy()
+			delete self.udp
 		}
-	
-		self.status(self.STATE_WARNING, 'Connecting');
-	
+
+		self.status(self.STATE_WARNING, 'Connecting')
+
 		if (self.config.host !== undefined) {
-			self.udp = new udp(self.config.host, self.config.udpPort);
-	
+			self.udp = new udp(self.config.host, self.config.udpPort)
+
 			self.udp.on('error', function (err) {
-				self.debug("Network error", err);
-				self.status(self.STATE_ERROR, err);
-				self.log('error',"Network error: " + err.message);
-			});
-	
+				self.debug('Network error', err)
+				self.status(self.STATE_ERROR, err)
+				self.log('error', 'Network error: ' + err.message)
+			})
+
 			// If we get data, thing should be good
 			self.udp.on('data', function () {
-				self.status(self.STATE_OK);
-			});
-	
+				self.status(self.STATE_OK)
+			})
+
 			self.udp.on('status_change', function (status, message) {
-				self.status(status, message);
-			});
+				self.status(status, message)
+			})
 		}
-	};
-	
+	}
+
 	init_tcp() {
 		var self = this
 
 		if (self.socket !== undefined) {
-			self.socket.destroy();
-			delete self.socket;
+			self.socket.destroy()
+			delete self.socket
 		}
-	
-		self.status(self.STATE_WARNING, 'Connecting');
-	
+
+		self.status(self.STATE_WARNING, 'Connecting')
+
 		if (self.config.host) {
-			self.socket = new tcp(self.config.host, self.config.tcpPort);
-	
+			self.socket = new tcp(self.config.host, self.config.tcpPort)
+
 			self.socket.on('status_change', function (status, message) {
-				self.status(status, message);
-			});
-	
-			self.socket.on('error', function (err) {
-				self.debug("Network error", err);
-				self.status(self.STATE_ERROR, err);
-				self.log('error',"Network error: " + err.message);
-			});
-	
-			self.socket.on('connect', function () {
-				self.status(self.STATE_OK);
-				self.debug("Connected");
+				self.status(status, message)
 			})
-	
-			self.socket.on('data', function (data) {});
+
+			self.socket.on('error', function (err) {
+				self.debug('Network error', err)
+				self.status(self.STATE_ERROR, err)
+				self.log('error', 'Network error: ' + err.message)
+			})
+
+			self.socket.on('connect', function () {
+				self.status(self.STATE_OK)
+				self.debug('Connected')
+			})
+
+			self.socket.on('data', function (data) {})
 		}
-	};
-	
+	}
+
 	// New config saved
 	updateConfig(config) {
 		if (this.udp !== undefined) {
-			this.udp.destroy();
-			delete this.udp;
+			this.udp.destroy()
+			delete this.udp
 		}
-	
+
 		if (this.socket !== undefined) {
-			this.socket.destroy();
-			delete this.socket;
+			this.socket.destroy()
+			delete this.socket
 		}
-	
+
 		this.config = config
 
 		if (this.config.prot == 'tcp') {
-			this.init_tcp();
-		};
-	
+			this.init_tcp()
+		}
+
 		if (this.config.prot == 'udp') {
-			this.init_udp();
-		};
-	
+			this.init_udp()
+		}
+
 		// if (this.config.prot == 'http') {
 		// 	this.status(this.STATE_OK);
 		// };
@@ -147,11 +147,11 @@ class CompanionRemoteLite extends instance_skel {
 		if (this.socket !== undefined) {
 			this.socket.destroy()
 		}
-	
+
 		if (this.udp !== undefined) {
-			this.udp.destroy();
+			this.udp.destroy()
 		}
-	
+
 		this.debug('destroy', this.id)
 	}
 
